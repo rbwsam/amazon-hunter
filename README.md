@@ -6,19 +6,31 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'amazon-hunter'
+    gem 'amazon-hunter', :git => 'git://github.com/rbwsam/amazon-hunter.git'
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install amazon-hunter
-
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'amazon/hunter'
+
+Amazon::Hunter.config({
+  :associate_tag => 'test',
+  :AWS_access_key_id => 'test',
+  :AWS_secret_key => 'test'
+})
+
+item = Amazon::Hunter.lookup('B000TTSXNI')
+
+p item.asin
+# B000TTSXNI
+
+p item.brand
+# Lasko
+```
 
 ## Contributing
 
