@@ -1,7 +1,10 @@
-require "amazon/hunter/version"
+require 'amazon/hunter/version'
+require 'amazon/item'
 
 module Amazon
-  module Hunter
-    # Your code goes here...
+  class Hunter
+    def self.lookup(asin)
+      Amazon::Item.new
+    end
   end
 end
