@@ -5,8 +5,6 @@ require 'amazon/ecs'
 module Amazon
   class Hunter
     class << self
-      attr_accessor :config
-
       def lookup(asin)
         res = Amazon::Ecs.item_lookup(asin, {:response_group => 'Medium'})
         raw_item = res.items.first
@@ -26,36 +24,26 @@ module Amazon
         item.upc_list = raw_item.get_array('ItemAttributes/UPCList/*')
         item.part_number = raw_item.get('ItemAttributes/PartNumber')
 
-        height = raw_item.get_element('ItemAttributes/PackageDimensions/Height')
-        item.height = {
-            :units => height.attributes['Units'].value,
-            :value => raw_item.get('ItemAttributes/PackageDimensions/Height')
-        }
-
-        weight = raw_item.get_element('ItemAttributes/PackageDimensions/Weight')
-        item.weight = {
-            :units => weight.attributes['Units'].value,
-            :value => raw_item.get('ItemAttributes/PackageDimensions/Weight')
-        }
-        
-        width = raw_item.get_element('ItemAttributes/PackageDimensions/Width')
-        item.width = {
-            :units => width.attributes['Units'].value,
-            :value => raw_item.get('ItemAttributes/PackageDimensions/Width')
-        }
-        
-        length = raw_item.get_element('ItemAttributes/PackageDimensions/Length')
-        item.length = {
-            :units => length.attributes['Units'].value,
-            :value => raw_item.get('ItemAttributes/PackageDimensions/Length')
-        }
-
-
-        #require 'pp'
-        #pp raw_item
-        #pp item
+        item.height = dimension('Height', raw_item)
+        item.weight = dimension('Weight', raw_item)
+        item.width = dimension('Width', raw_item)
+        item.length = dimension('Length', raw_item)
 
         item
+      end
+
+      def config=(config)
+        Amazon::Ecs.options = config
+      end
+
+      private
+
+      def dimension(dimension, item)
+        element = item.get_element("ItemAttributes/PackageDimensions/#{dimension}")
+        {
+            :units => element.attributes['Units'].value,
+            :value => item.get("ItemAttributes/PackageDimensions/#{dimension}")
+        }
       end
     end
   end

@@ -10,16 +10,6 @@ describe 'Amazon::Hunter' do
           :AWS_secret_key => 'test'
       }
       Amazon::Hunter.config = config
-      Amazon::Hunter.config.should eql config
-    end
-  end
-
-  describe '::lookup' do
-    it 'takes an ASIN and returns an Amazon::Item' do
-      item = Amazon::Hunter.lookup('B000W73M10')
-
-      item.should be_an_instance_of Amazon::Item
-      item.asin.should eql 'B000W73M10'
     end
   end
 
