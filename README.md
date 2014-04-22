@@ -1,6 +1,6 @@
 # Amazon::Hunter
 
-TODO: Write a gem description
+Simple gem for looking up Amazon products.
 
 ## Installation
 
