@@ -1,6 +1,6 @@
 # Amazon::Hunter
 
-Simple gem for looking up Amazon products.
+Uses the Amazon Product Advertising API to lookup and search for Amazon items.
 
 ## Installation
 
