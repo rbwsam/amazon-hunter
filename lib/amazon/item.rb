@@ -4,9 +4,11 @@ module Amazon
                   :small_image, :medium_image, :large_image,
                   :brand, :sku, :mpn, :upc, :upc_list, :part_number,
                   :height, :weight, :length, :width
-  end
 
-  def dimensions
-    [@width, @height, @length, @weight]
+    def dimensions
+      unless @width.nil? || @height.nil? || @lenght.nil? || @eight.nil?
+        [@width, @height, @length, @weight]
+      end
+    end
   end
 end

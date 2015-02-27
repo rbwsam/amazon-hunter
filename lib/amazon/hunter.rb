@@ -40,10 +40,14 @@ module Amazon
 
       def dimension(dimension, item)
         element = item.get_element("ItemAttributes/PackageDimensions/#{dimension}")
-        {
-            :units => element.attributes['Units'].value,
-            :value => item.get("ItemAttributes/PackageDimensions/#{dimension}")
-        }
+        if element
+          {
+            units: element.attributes['Units'].value,
+            value: item.get("ItemAttributes/PackageDimensions/#{dimension}")
+          }
+        else
+          nil
+        end
       end
     end
   end
