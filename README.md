@@ -17,11 +17,11 @@ And then execute:
 ```ruby
 require 'amazon/hunter'
 
-Amazon::Hunter.config({
+Amazon::Hunter.config = {
   :associate_tag => 'test',
   :AWS_access_key_id => 'test',
   :AWS_secret_key => 'test'
-})
+}
 
 item = Amazon::Hunter.lookup('B000TTSXNI')
 
